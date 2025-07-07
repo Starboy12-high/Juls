@@ -1,24 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mtnBundles = [
-        { name: '1GB', price: '4.8' }, { name: '2GB', price: '9.6' }, { name: '3GB', price: '14.5' },
-        { name: '4GB', price: '19.2' }, { name: '5GB', price: '24' }, { name: '6GB', price: '28.8' },
-        { name: '7GB', price: '33.6' }, { name: '8GB', price: '38.4' }, { name: '9GB', price: '43.2' },
-        { name: '10GB', price: '48' }
+        { name: '1GB Data', price: '4.8', data_allowance: '1GB', validity: '30 Days' },
+        { name: '2GB Data', price: '9.6', data_allowance: '2GB', validity: '30 Days' },
+        { name: '3GB Data', price: '14.5', data_allowance: '3GB', validity: '30 Days' },
+        { name: '4GB Data', price: '19.2', data_allowance: '4GB', validity: '30 Days' },
+        { name: '5GB Data', price: '24', data_allowance: '5GB', validity: '30 Days' },
+        { name: '6GB Data', price: '28.8', data_allowance: '6GB', validity: '30 Days' },
+        { name: '7GB Data', price: '33.6', data_allowance: '7GB', validity: '30 Days' },
+        { name: '8GB Data', price: '38.4', data_allowance: '8GB', validity: '30 Days' },
+        { name: '9GB Data', price: '43.2', data_allowance: '9GB', validity: '30 Days' },
+        { name: '10GB Data', price: '48', data_allowance: '10GB', validity: '30 Days' }
     ];
 
     const telecelBundles = [
-        { name: '5GB', price: '22' }, { name: '10GB', price: '44' }, { name: '15GB', price: '66' }
+        { name: '5GB Data', price: '22', data_allowance: '5GB', validity: '30 Days' },
+        { name: '10GB Data', price: '44', data_allowance: '10GB', validity: '30 Days' },
+        { name: '15GB Data', price: '66', data_allowance: '15GB', validity: '30 Days' }
     ];
 
     const atBundles = [
-        { name: '1GB', price: '4.5' }, { name: '2GB', price: '9' }, { name: '3GB', price: '13.5' },
-        { name: '4GB', price: '18' }, { name: '5GB', price: '22.5' }, { name: '6GB', price: '27' },
-        { name: '7GB', price: '31.5' }, { name: '8GB', price: '36' }, { name: '9GB', price: '40.5' },
-        { name: '10GB', price: '45' }
+        { name: '1GB Data', price: '4.5', data_allowance: '1GB', validity: '30 Days' },
+        { name: '2GB Data', price: '9', data_allowance: '2GB', validity: '30 Days' },
+        { name: '3GB Data', price: '13.5', data_allowance: '3GB', validity: '30 Days' },
+        { name: '4GB Data', price: '18', data_allowance: '4GB', validity: '30 Days' },
+        { name: '5GB Data', price: '22.5', data_allowance: '5GB', validity: '30 Days' },
+        { name: '6GB Data', price: '27', data_allowance: '6GB', validity: '30 Days' },
+        { name: '7GB Data', price: '31.5', data_allowance: '7GB', validity: '30 Days' },
+        { name: '8GB Data', price: '36', data_allowance: '8GB', validity: '30 Days' },
+        { name: '9GB Data', price: '40.5', data_allowance: '9GB', validity: '30 Days' },
+        { name: '10GB Data', price: '45', data_allowance: '10GB', validity: '30 Days' }
     ];
 
     const otherServices = [
-        { name: 'AFA Registration', price: '5', provider: 'Service' }
+        { name: 'AFA Registration', price: '5', provider: 'Service', data_allowance: 'N/A', validity: 'N/A' }
     ];
 
     // Initialize cart from localStorage or create an empty one
@@ -50,29 +64,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
-    function createProductCard(bundle, providerName) {
-        const productName = `${providerName} ${bundle.name}`;
+    function createProductListItem(bundle, providerName) {
+        const fullProductName = providerName ? `${providerName} ${bundle.name}` : bundle.name;
         const productPrice = `GH¢${bundle.price}`;
-        const card = `
-            <div class="col-md-4">
-                <div class="card product-card">
-                    <div class="card-body">
-                        <h5 class="card-title">${productName}</h5>
-                        <p class="card-text">Price: ${productPrice}</p>
-                        <button class="btn btn-primary add-to-cart-btn" data-name="${productName}" data-price="${productPrice}">Add to Cart</button>
+
+        // Placeholder for provider icon - can be expanded later
+        // let iconHtml = `<span class="product-icon placeholder-icon"></span>`;
+        // if (bundle.iconUrl) { iconHtml = `<img src="${bundle.iconUrl}" alt="${providerName}" class="product-icon">`; }
+        // else if (providerName === 'MTN') { iconHtml = `<span class="product-icon mtn-icon">M</span>`; } // Example
+
+        const listItem = `
+            <li class="product-list-item">
+                <div class="product-info">
+                    <h5 class="product-name">${fullProductName}</h5>
+                    <div class="product-details">
+                        <span class="product-allowance">Data: ${bundle.data_allowance}</span>
+                        <span class="product-validity">Validity: ${bundle.validity}</span>
                     </div>
                 </div>
-            </div>
+                <div class="product-price-action">
+                    <span class="product-price">${productPrice}</span>
+                    <button class="btn btn-primary add-to-cart-btn" data-name="${fullProductName}" data-price="${productPrice}">Add to Cart</button>
+                </div>
+            </li>
         `;
-        return card;
+        return listItem;
     }
 
     function renderBundles(bundles, containerId, providerName) {
         const container = document.getElementById(containerId);
         if (container) {
             bundles.forEach(bundle => {
-                container.innerHTML += createProductCard(bundle, providerName);
+                // Use createProductListItem now
+                container.innerHTML += createProductListItem(bundle, bundle.provider || providerName);
             });
         }
     }

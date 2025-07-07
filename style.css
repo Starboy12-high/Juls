@@ -374,3 +374,132 @@ a:hover {
 .dark-mode .container > h1, .dark-mode .container > h2, .dark-mode .container > h3 {
     color: var(--color-primary); /* Teal for prominent page titles in dark mode too */
 }
+
+/* Product List View Styles */
+.product-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.product-list-item {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ddd; /* Light border for each item */
+    margin-bottom: 10px;
+    border-radius: 8px; /* Rounded corners like cards */
+    background-color: var(--color-card-background-light); /* Use card background for consistency */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    transition: box-shadow 0.3s ease-in-out;
+}
+.product-list-item:hover {
+    box-shadow: 0 4px 15px rgba(0, 169, 157, 0.1); /* Teal shadow on hover */
+}
+
+.product-info {
+    flex-grow: 1; /* Takes up available space */
+    margin-right: 1rem; /* Space before price/action block */
+}
+
+.product-name {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: var(--color-accent); /* Accent blue for name */
+    margin-bottom: 0.25rem;
+}
+
+.product-details {
+    font-size: 0.9rem;
+    color: #555; /* Slightly lighter text for details */
+    margin-bottom: 0.5rem;
+}
+.product-details span {
+    margin-right: 15px; /* Space between detail items */
+}
+.product-details .product-allowance strong,
+.product-details .product-validity strong {
+    color: var(--color-text-light); /* Darker text for the actual value */
+}
+
+
+.product-price-action {
+    display: flex;
+    flex-direction: column; /* Stack price and button on small screens if needed */
+    align-items: flex-end; /* Align to the right */
+    min-width: 150px; /* Ensure button doesn't get too squished */
+    text-align: right;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-primary); /* Teal for price */
+    margin-bottom: 0.5rem;
+}
+
+.product-list-item .btn-primary { /* Ensure add to cart button is styled */
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    padding: 0.375rem 0.75rem; /* Standard Bootstrap button padding */
+    font-size: 0.9rem;
+}
+.product-list-item .btn-primary:hover {
+    background-color: #007A70; /* Darker teal */
+    border-color: #007A70;
+}
+
+/* Dark Mode for Product List */
+.dark-mode .product-list-item {
+    background-color: var(--color-card-background-dark);
+    border-color: #444;
+}
+
+.dark-mode .product-name {
+    color: var(--color-primary); /* Teal for product name in dark mode for more energy */
+}
+
+.dark-mode .product-details {
+    color: #bbb; /* Lighter grey for details in dark mode */
+}
+.dark-mode .product-details .product-allowance strong,
+.dark-mode .product-details .product-validity strong {
+    color: var(--color-text-dark);
+}
+
+.dark-mode .product-price {
+    color: var(--color-secondary); /* Orange price in dark mode for pop */
+}
+
+.dark-mode .product-list-item .btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #FFFFFF; /* White text on teal button */
+}
+.dark-mode .product-list-item .btn-primary:hover {
+    background-color: #00C2B2; /* Brighter teal hover */
+    border-color: #00C2B2;
+}
+
+
+/* Responsive adjustments for product list items if needed */
+@media (max-width: 767.98px) { /* Medium devices and down */
+    .product-list-item {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+    .product-info {
+        margin-right: 0;
+        margin-bottom: 0.75rem; /* Space below info block */
+    }
+    .product-price-action {
+        width: 100%; /* Full width for price/action block */
+        flex-direction: row; /* Price and button side-by-side */
+        justify-content: space-between; /* Space them out */
+        align-items: center;
+    }
+    .product-price {
+        margin-bottom: 0; /* Remove bottom margin when side-by-side */
+    }
+}
