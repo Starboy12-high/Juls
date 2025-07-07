@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Cheap Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../style.css"> <!-- Main site styles for consistency -->
+    <link rel="stylesheet" href="admin_style.css">
+</head>
+<body class="admin-body">
+    <div class="admin-dashboard-container">
+        <nav class="admin-sidebar">
+            <div class="sidebar-header text-center py-3">
+                <h4>Admin Portal</h4>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">
+                        <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-shopping-cart mr-2"></i>Orders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-users mr-2"></i>Customers (Placeholder)
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-cogs mr-2"></i>Settings (Placeholder)
+                    </a>
+                </li>
+                <li class="nav-item mt-auto">
+                    <a class="nav-link" href="#" id="admin-logout-btn">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="admin-main-content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light admin-top-navbar">
+                <button class="btn btn-outline-secondary d-lg-none" id="sidebar-toggle-btn"><i class="fas fa-bars"></i></button>
+                <h5 class="ml-2 mb-0">Orders Overview</h5>
+                <ul class="navbar-nav ml-auto">
+                     <li class="nav-item">
+                        <button id="theme-toggle-admin" class="btn btn-outline-secondary">Toggle Theme</button>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="container-fluid mt-3">
+                <h2>Manage Orders</h2>
+                <p>Below is a list of customer orders. Use the actions to update their status.</p>
+
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Name</th>
+                            <th>Email</th>
+                            <th>Items</th>
+                            <th>Total (GH¢)</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-table-body">
+                        <!-- Placeholder Row 1 -->
+                        <tr>
+                            <td>ORD-001</td>
+                            <td>John Doe</td>
+                            <td>john.doe@example.com</td>
+                            <td>MTN 1GB, AFA Registration</td>
+                            <td>9.80</td>
+                            <td>2023-10-26</td>
+                            <td><span class="badge badge-warning">Pending</span></td>
+                            <td>
+                                <select class="form-control form-control-sm order-status-select">
+                                    <option value="Pending" selected>Pending</option>
+                                    <option value="Complete">Complete</option>
+                                    <option value="Failed">Failed</option>
+                                    <option value="Refunded">Refunded</option>
+                                </select>
+                                <button class="btn btn-sm btn-info mt-1">Update</button>
+                            </td>
+                        </tr>
+                        <!-- Placeholder Row 2 -->
+                        <tr>
+                            <td>ORD-002</td>
+                            <td>Jane Smith</td>
+                            <td>jane.smith@example.com</td>
+                            <td>Telecel 10GB</td>
+                            <td>44.00</td>
+                            <td>2023-10-25</td>
+                            <td><span class="badge badge-success">Complete</span></td>
+                            <td>
+                                <select class="form-control form-control-sm order-status-select">
+                                    <option value="Pending">Pending</option>
+                                    <option value="Complete" selected>Complete</option>
+                                    <option value="Failed">Failed</option>
+                                    <option value="Refunded">Refunded</option>
+                                </select>
+                                <button class="btn btn-sm btn-info mt-1">Update</button>
+                            </td>
+                        </tr>
+                        <!-- More rows would be dynamically generated by backend -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Admin theme toggle
+            const themeToggleAdmin = document.getElementById('theme-toggle-admin');
+            if (themeToggleAdmin) {
+                themeToggleAdmin.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+                    if (document.body.classList.contains('dark-mode')) {
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+            }
+            // Apply theme from localStorage
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+
+            // Admin logout placeholder
+            const adminLogoutBtn = document.getElementById('admin-logout-btn');
+            if (adminLogoutBtn) {
+                adminLogoutBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    alert('Admin logout (placeholder). Redirecting to admin login...');
+                    window.location.href = 'login.html';
+                });
+            }
+
+            // Placeholder for order status update
+            document.querySelectorAll('.order-status-select + .btn-info').forEach(button => {
+                button.addEventListener('click', function() {
+                    const select = this.previousElementSibling;
+                    const newStatus = select.value;
+                    const orderId = this.closest('tr').querySelector('td:first-child').textContent;
+                    alert(`Placeholder: Update Order ${orderId} to status ${newStatus}. Backend call needed.`);
+                    // Visually update badge (placeholder)
+                    const badge = this.closest('tr').querySelector('.badge');
+                    badge.textContent = newStatus;
+                    badge.className = `badge badge-${newStatus === 'Complete' ? 'success' : (newStatus === 'Pending' ? 'warning' : 'danger')}`;
+                });
+            });
+
+            // Sidebar toggle for small screens (basic implementation)
+            const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+            const adminSidebar = document.querySelector('.admin-sidebar');
+            if (sidebarToggleBtn && adminSidebar) {
+                sidebarToggleBtn.addEventListener('click', () => {
+                    adminSidebar.classList.toggle('active'); // You'd need CSS for .active state, e.g., display:block or transform
+                    // For a simple toggle, you might change style.display or a class that controls margin/position
+                    if(adminSidebar.style.display === 'none' || adminSidebar.style.display === ''){
+                        adminSidebar.style.display = 'block'; // Or add a class
+                    } else {
+                        adminSidebar.style.display = 'none'; // Or remove a class
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

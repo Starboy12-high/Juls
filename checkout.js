@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = document.getElementById('name').value; // Though not directly sent to Paystack, good for records
         const phone = document.getElementById('phone').value; // Also good for records/notifications
         const amount = parseFloat(checkoutTotalElement.textContent) * 100; // Amount in kobo/pesewas
+        const orderRef = '' + Math.floor((Math.random() * 1000000000) + 1); // Generate a unique reference for the order
 
         if (!email || !name || !phone) {
             alert("Please fill in all billing details.");
@@ -65,13 +66,46 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Actual Paystack integration
+        // TODO: Backend Interaction Point 1: Save customer details and create order
+        // Example:
+        // fetch('/api/orders/initiate', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         name: name,
+        //         email: email,
+        //         phone: phone,
+        //         cart: cart,
+        //         totalAmount: amount / 100, // Send amount in main currency unit
+        //         orderReference: orderRef,
+        //         status: 'Pending'
+        //     })
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     if(data.success) {
+        //         // Proceed to Paystack if order saved successfully
+                   initiatePaystack(email, amount, orderRef, name, phone);
+        //     } else {
+        //         alert('Error initiating order. Please try again. ' + (data.message || ''));
+        //     }
+        // })
+        // .catch(error => {
+        //     console.error('Error initiating order:', error);
+        //     alert('Could not connect to server to initiate order. Please check your connection.');
+        // });
+
+        // For now, directly call Paystack without backend confirmation:
+        initiatePaystack(email, amount, orderRef, name, phone);
+    }
+
+    function initiatePaystack(email, amount, orderRef, name, phone) {
         const handler = PaystackPop.setup({
             key: PAYSTACK_PUBLIC_KEY,
             email: email,
             amount: amount, // Amount in kobo/pesewas
             currency: "GHS",
-            ref: '' + Math.floor((Math.random() * 1000000000) + 1), // Generate a unique reference
+            ref: orderRef, // Use the pre-generated order reference
             metadata: {
                 custom_fields: [
                     {
@@ -94,7 +128,24 @@ document.addEventListener('DOMContentLoaded', () => {
             callback: function(response) {
                 // Payment successful
                 alert('Payment successful! Transaction reference: ' + response.reference);
-                // Here you would typically verify the transaction on your backend
+
+                // TODO: Backend Interaction Point 2: Update order status to "Complete"
+                // Example:
+                // fetch('/api/orders/complete', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({
+                //         orderReference: orderRef, // or response.reference if Paystack ref is primary
+                //         paystackReference: response.reference,
+                //         status: 'Complete'
+                //     })
+                // })
+                // .then(res => res.json())
+                // .then(data => {
+                //     if(data.success){ console.log("Order status updated to Complete."); }
+                //     else { console.error("Failed to update order status:", data.message); }
+                // });
+
                 localStorage.removeItem('cart');
                 cart = [];
                 updateCartCount();
@@ -102,6 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             onClose: function() {
                 // User closed the popup
+                // TODO: Backend Interaction Point 3 (Optional): Update order status to "Abandoned" or similar
+                // fetch('/api/orders/update_status', { /* ... status: 'Abandoned' ... */ });
                 alert('Transaction was not completed.');
             }
         });

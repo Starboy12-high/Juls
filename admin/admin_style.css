@@ -1,0 +1,126 @@
+body.admin-body { /* Specific class for admin body if needed */
+    background-color: #f4f7f6; /* Light grey background for admin area */
+}
+
+.admin-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.admin-login-card {
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode adjustments for admin if needed, assuming main style.css is also linked */
+body.dark-mode .admin-body {
+    background-color: #222; /* Darker background for admin in dark mode */
+}
+
+body.dark-mode .admin-login-card {
+    background-color: #3E3E3E; /* Match card color from main site's dark mode */
+    color: #f8f9fa;
+}
+
+body.dark-mode .admin-login-card .form-control {
+    background-color: #495057;
+    color: #f8f9fa;
+    border-color: #6c757d;
+}
+
+body.dark-mode .admin-login-card .form-control::placeholder {
+    color: #adb5bd;
+}
+
+/* Admin Dashboard Specific Styles */
+.admin-dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 250px;
+    background-color: #343a40; /* Bootstrap dark color */
+    color: #fff;
+    padding: 15px;
+}
+
+.admin-sidebar .nav-link {
+    color: #adb5bd;
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+    color: #fff;
+    background-color: #495057;
+}
+
+.admin-main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for content area */
+}
+
+
+/* Dark mode for admin dashboard */
+body.dark-mode .admin-main-content {
+    background-color: #333; /* Main content area dark background */
+    color: #f8f9fa;
+}
+
+body.dark-mode .admin-sidebar {
+    background-color: #222; /* Even darker sidebar */
+}
+
+body.dark-mode .table { /* Assuming Bootstrap tables are used */
+    color: #f8f9fa;
+}
+
+body.dark-mode .table th,
+body.dark-mode .table td,
+body.dark-mode .table thead th {
+    border-color: #454d55;
+}
+
+body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.02); /* Subtle striping for dark mode */
+}
+
+body.dark-mode .table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.admin-top-navbar {
+    border-bottom: 1px solid #dee2e6; /* Light border for the top navbar */
+    background-color: #fff !important; /* Override main site potentially darker navs */
+}
+body.dark-mode .admin-top-navbar {
+    background-color: #3E3E3E !important; /* Dark bg for admin top nav */
+    border-bottom: 1px solid #555;
+}
+body.dark-mode .admin-top-navbar h5 {
+    color: #f8f9fa;
+}
+
+
+/* Sidebar active state for toggle - basic example */
+@media (max-width: 991.98px) { /* lg breakpoint */
+    .admin-sidebar {
+        position: fixed; /* Or absolute, depending on layout */
+        z-index: 1000;
+        height: 100%;
+        /* Initially hidden or transformed off-screen */
+        display: none; /* Simple hide/show */
+        /* transform: translateX(-100%); */
+        /* transition: transform 0.3s ease-in-out; */
+    }
+    .admin-sidebar.active { /* This class would be toggled by JS */
+        display: block;
+        /* transform: translateX(0); */
+    }
+}
