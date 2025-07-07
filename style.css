@@ -376,6 +376,57 @@ a:hover {
 }
 
 
+/* Provider Collapse Styles */
+.provider-header a {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--color-card-background-light); /* Similar to card header */
+    color: var(--color-accent); /* Accent blue for header text */
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Rounded corners for the header */
+    transition: background-color 0.2s ease-in-out;
+}
+
+.provider-header a:hover {
+    background-color: #f0f0f0; /* Light hover effect */
+    color: var(--color-primary); /* Teal on hover */
+}
+
+.provider-header a .collapse-icon {
+    transition: transform 0.3s ease;
+}
+
+.provider-header a[aria-expanded="true"] .collapse-icon {
+    transform: rotate(180deg);
+}
+
+.product-list { /* This class is on the UL */
+    margin-top: 10px; /* Space between header and list */
+    border-top: none; /* Remove top border if header has bottom border */
+    padding-left: 0; /* Remove default ul padding */
+    list-style-type: none; /* Remove default list bullets */
+}
+
+/* Dark Mode for Provider Collapse */
+.dark-mode .provider-header a {
+    background-color: var(--color-card-background-dark);
+    color: var(--color-primary); /* Teal header text in dark mode for energy */
+    border-color: #444;
+}
+
+.dark-mode .provider-header a:hover {
+    background-color: #3a3f44; /* Darker hover for dark mode */
+    color: var(--color-secondary); /* Orange text on hover */
+}
+
+.dark-mode .provider-header a .collapse-icon {
+    color: var(--color-primary); /* Ensure icon matches text color */
+}
+.dark-mode .provider-header a[aria-expanded="true"] .collapse-icon {
+    color: var(--color-secondary); /* Match hover text color when expanded */
+}
+
 /* Product List View Styles */
 .product-list {
     list-style-type: none;
