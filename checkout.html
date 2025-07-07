@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Cheap Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Cheap Data</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+                </li>
+                <li class="nav-item dashboard-nav-item-managed" style="display:none;">
+                    <a class="nav-link" href="dashboard.html">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact Us</a>
+                </li>
+                <li class="nav-item login-nav-item-managed">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <li class="nav-item register-nav-item-managed">
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+                <li class="nav-item logout-nav-item-managed" style="display:none;">
+                    <a class="nav-link" href="#" id="logout-link">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <button id="theme-toggle" class="btn btn-secondary">Toggle Theme</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Checkout</h2>
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Billing Details</h4>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number (for transaction)</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter your 10-digit phone number" pattern="[0-9]{10}" required>
+                    </div>
+                    <!-- More fields like address could be added if needed -->
+                    <hr>
+                    <h4>Payment Method</h4>
+                    <p>You will be redirected to Paystack to complete your payment.</p>
+                    <!-- Paystack button will be dynamically added here or use a generic button to trigger Paystack -->
+                     <button type="submit" class="btn btn-success btn-lg btn-block" id="pay-with-paystack">Pay Now</button>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <h4>Order Summary</h4>
+                <ul class="list-group mb-3" id="order-summary-list">
+                    <!-- Order summary items will be loaded here -->
+                </ul>
+                <div class="d-flex justify-content-between">
+                    <h5>Total</h5>
+                    <h5>GH¢<span id="checkout-total">0.00</span></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script src="checkout.js"></script>
+</body>
+</html>

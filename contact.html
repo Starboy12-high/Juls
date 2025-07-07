@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Cheap Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Cheap Data</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+                </li>
+                <li class="nav-item dashboard-nav-item-managed" style="display:none;">
+                    <a class="nav-link" href="dashboard.html">Dashboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="contact.html">Contact Us <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item login-nav-item-managed">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <li class="nav-item register-nav-item-managed">
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+                <li class="nav-item logout-nav-item-managed" style="display:none;">
+                    <a class="nav-link" href="#" id="logout-link">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <button id="theme-toggle" class="btn btn-secondary">Toggle Theme</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Contact & Support</h2>
+        <p>We're here to help! Reach out to us through any of the channels below.</p>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4 class="card-title">Customer Support Channels</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <i class="fab fa-whatsapp contact-icon" style="color: #25D366;"></i>
+                        <a href="https://wa.me/233204781898" target="_blank" rel="noopener noreferrer">Chat with us on WhatsApp: 0204781898</a>
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-phone-alt contact-icon" style="color: #007bff;"></i>
+                        Phone Support: <a href="tel:+233539292798">0539292798</a> (For immediate issues)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-envelope contact-icon" style="color: #dc3545;"></i>
+                        Email Support: <a href="mailto:support@cheapdata.com">support@cheapdata.com</a> (Placeholder)
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4 class="card-title">Live Chat (Coming Soon)</h4>
+                <p>We are working on integrating a live chat feature for even faster assistance.</p>
+                <button class="btn btn-info" disabled>Live Chat (Unavailable)</button>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="text-center mt-5 mb-3">
+        <p>&copy; <span id="current-year"></span> Cheap Data. All Rights Reserved.</p>
+        <div>
+            <a href="https://wa.me/233204781898" target="_blank" rel="noopener noreferrer" class="mr-2"><i class="fab fa-whatsapp fa-2x" style="color: #25D366;"></i></a>
+            <a href="tel:+233539292798"><i class="fas fa-phone-alt fa-2x" style="color: #007bff;"></i></a>
+            <!-- Add other social media/contact links here if desired -->
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update cart count
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountElement.textContent = totalItems;
+            }
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Global script.js now handles cart count update and nav auth state.
+            // window.updateGlobalCartCount(); // Called by script.js
+            // window.updateNavBasedOnAuthState(); // Called by script.js
+        });
+    </script>
+</body>
+</html>

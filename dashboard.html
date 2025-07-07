@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Cheap Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Cheap Data</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item dashboard-nav-item-managed active" style="display:none;"> <!-- Active state managed by JS if needed, or remove active -->
+                    <a class="nav-link" href="dashboard.html">Dashboard <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact Us</a>
+                </li>
+                <li class="nav-item login-nav-item-managed"> <!-- Should be hidden if on dashboard -->
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <li class="nav-item register-nav-item-managed"> <!-- Should be hidden if on dashboard -->
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+                <li class="nav-item logout-nav-item-managed" style="display:none;">
+                    <a class="nav-link" href="#" id="logout-link">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <button id="theme-toggle" class="btn btn-secondary">Toggle Theme</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Active Dashboard</h2>
+        <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="wallet-tab" data-toggle="tab" href="#wallet" role="tab" aria-controls="wallet" aria-selected="false">Wallet</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="product-details-tab" data-toggle="tab" href="#product-details" role="tab" aria-controls="product-details" aria-selected="false">Product Details</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="order-details-tab" data-toggle="tab" href="#order-details" role="tab" aria-controls="order-details" aria-selected="false">Order Details</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="dashboardTabsContent">
+            <div class="tab-pane fade show active p-3" id="about" role="tabpanel" aria-labelledby="about-tab">
+                <h4>About Cheap Data</h4>
+                <p>Welcome to your Cheap Data dashboard. Here you can manage your account, view your orders, and fund your wallet.</p>
+                <p>We are committed to providing the most affordable data bundles in Ghana.</p>
+            </div>
+            <div class="tab-pane fade p-3" id="wallet" role="tabpanel" aria-labelledby="wallet-tab">
+                <h4>Wallet</h4>
+                <h5>Current Balance: <span id="wallet-balance">GH¢0.00</span></h5>
+                <!-- Placeholder for wallet balance, fetched dynamically in a real app -->
+                <button class="btn btn-success mt-2" id="fund-wallet-btn">Fund Wallet</button>
+            </div>
+            <div class="tab-pane fade p-3" id="product-details" role="tabpanel" aria-labelledby="product-details-tab">
+                <h4>Product Details</h4>
+                <p>This section will show detailed information about products you have purchased or shown interest in. (Placeholder)</p>
+                <!-- Future: List specific products or services -->
+            </div>
+            <div class="tab-pane fade p-3" id="order-details" role="tabpanel" aria-labelledby="order-details-tab">
+                <h4>Order History & Details</h4>
+                <p>No orders yet. All your completed orders and their statuses will appear here. (Placeholder)</p>
+                <!-- Future: List orders with details -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const PAYSTACK_PUBLIC_KEY = 'pk_live_b2627be3c9006fe634fe3f996a15d5c700f20ec8';
+
+            // Logout functionality
+            const logoutLink = document.getElementById('logout-link');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    if (window.logout) window.logout();
+                });
+            }
+
+            // Wallet funding with Paystack
+            const fundWalletBtn = document.getElementById('fund-wallet-btn');
+            if(fundWalletBtn) {
+                fundWalletBtn.addEventListener('click', () => {
+                    const amountToFundStr = prompt("Enter amount to fund (GH¢):", "10.00");
+                    if (amountToFundStr) {
+                        const amountToFund = parseFloat(amountToFundStr);
+                        if (!isNaN(amountToFund) && amountToFund > 0) {
+                            // Simulate getting user email (in a real app, this would be from session)
+                            const userEmail = localStorage.getItem('userEmail') || prompt("Please enter your email for payment:", "user@example.com");
+                            if (!userEmail) {
+                                alert("Email is required to proceed with payment.");
+                                return;
+                            }
+                            localStorage.setItem('userEmail', userEmail); // Save for next time (demo)
+
+                            const handler = PaystackPop.setup({
+                                key: PAYSTACK_PUBLIC_KEY,
+                                email: userEmail,
+                                amount: amountToFund * 100, // Amount in pesewas
+                                currency: "GHS",
+                                ref: 'wallet-' + Math.floor((Math.random() * 1000000000) + 1),
+                                callback: function(response) {
+                                    alert('Wallet funding successful! Reference: ' + response.reference);
+                                    // Update wallet balance (client-side simulation)
+                                    const balanceElement = document.getElementById('wallet-balance');
+                                    let currentBalance = parseFloat(balanceElement.textContent.replace('GH¢', ''));
+                                    currentBalance += amountToFund;
+                                    balanceElement.textContent = `GH¢${currentBalance.toFixed(2)}`;
+                                    // In a real app, verify transaction with backend and update balance
+                                },
+                                onClose: function() {
+                                    alert('Wallet funding cancelled.');
+                                }
+                            });
+                            handler.openIframe();
+                        } else {
+                            alert("Invalid amount entered.");
+                        }
+                    }
+                });
+            }
+            // Tab functionality for Bootstrap
+            $('#dashboardTabs a').on('click', function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            });
+        });
+        // Global script.js handles theme loading
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Cheap Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-item img {
+            max-width: 100px;
+            margin-right: 15px;
+        }
+        .quantity-input {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Cheap Data</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">Products</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="cart.html">Cart (<span id="cart-count">0</span>) <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dashboard-nav-item-managed" style="display:none;">
+                    <a class="nav-link" href="dashboard.html">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact Us</a>
+                </li>
+                <li class="nav-item login-nav-item-managed">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <li class="nav-item register-nav-item-managed">
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+                <li class="nav-item logout-nav-item-managed" style="display:none;">
+                    <a class="nav-link" href="#" id="logout-link">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <button id="theme-toggle" class="btn btn-secondary">Toggle Theme</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Your Shopping Cart</h2>
+        <div id="cart-items-container">
+            <!-- Cart items will be loaded here by JavaScript -->
+        </div>
+        <div class="text-right mt-3" id="cart-summary" style="display: none;">
+            <h4>Total: GH¢<span id="cart-total">0.00</span></h4>
+            <a href="checkout.html" class="btn btn-primary btn-lg mt-2">Proceed to Checkout</a>
+            <button class="btn btn-danger mt-2" id="clear-cart-btn">Clear Cart</button>
+        </div>
+        <div id="empty-cart-message" class="mt-3" style="display: none;">
+            <p>Your cart is empty. <a href="products.html">Continue shopping</a>.</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
