@@ -1,38 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mtnBundles = [
-        { name: '1GB Data', price: '4.8', data_allowance: '1GB', validity: '30 Days' },
-        { name: '2GB Data', price: '9.6', data_allowance: '2GB', validity: '30 Days' },
-        { name: '3GB Data', price: '14.5', data_allowance: '3GB', validity: '30 Days' },
-        { name: '4GB Data', price: '19.2', data_allowance: '4GB', validity: '30 Days' },
-        { name: '5GB Data', price: '24', data_allowance: '5GB', validity: '30 Days' },
-        { name: '6GB Data', price: '28.8', data_allowance: '6GB', validity: '30 Days' },
-        { name: '7GB Data', price: '33.6', data_allowance: '7GB', validity: '30 Days' },
-        { name: '8GB Data', price: '38.4', data_allowance: '8GB', validity: '30 Days' },
-        { name: '9GB Data', price: '43.2', data_allowance: '9GB', validity: '30 Days' },
-        { name: '10GB Data', price: '48', data_allowance: '10GB', validity: '30 Days' }
+        { name: '1GB Data', price: '4.8', data_allowance: '1GB', validity: '30 Days', brandKey: 'mtn' },
+        { name: '2GB Data', price: '9.6', data_allowance: '2GB', validity: '30 Days', brandKey: 'mtn' },
+        { name: '3GB Data', price: '14.5', data_allowance: '3GB', validity: '30 Days', brandKey: 'mtn' },
+        { name: '4GB Data', price: '19.2', data_allowance: '4GB', validity: '30 Days', brandKey: 'mtn' },
+        { name: '5GB Data', price: '24', data_allowance: '5GB', validity: '30 Days', brandKey: 'mtn' },
+        { name: '6GB Data', price: '28.8', data_allowance: '6GB', validity: '30 Days', brandKey: 'mtn' },
+        { name: '7GB Data', price: '33.6', data_allowance: '7GB', validity: '30 Days', brandKey: 'mtn' },
+        { name: '8GB Data', price: '38.4', data_allowance: '8GB', validity: '30 Days', brandKey: 'mtn' },
+        { name: '9GB Data', price: '43.2', data_allowance: '9GB', validity: '30 Days', brandKey: 'mtn' },
+        { name: '10GB Data', price: '48', data_allowance: '10GB', validity: '30 Days', brandKey: 'mtn' }
     ];
 
     const telecelBundles = [
-        { name: '5GB Data', price: '22', data_allowance: '5GB', validity: '30 Days' },
-        { name: '10GB Data', price: '44', data_allowance: '10GB', validity: '30 Days' },
-        { name: '15GB Data', price: '66', data_allowance: '15GB', validity: '30 Days' }
+        { name: '5GB Data', price: '22', data_allowance: '5GB', validity: '30 Days', brandKey: 'telecel' },
+        { name: '10GB Data', price: '44', data_allowance: '10GB', validity: '30 Days', brandKey: 'telecel' },
+        { name: '15GB Data', price: '66', data_allowance: '15GB', validity: '30 Days', brandKey: 'telecel' }
     ];
 
     const atBundles = [
-        { name: '1GB Data', price: '4.5', data_allowance: '1GB', validity: '30 Days' },
-        { name: '2GB Data', price: '9', data_allowance: '2GB', validity: '30 Days' },
-        { name: '3GB Data', price: '13.5', data_allowance: '3GB', validity: '30 Days' },
-        { name: '4GB Data', price: '18', data_allowance: '4GB', validity: '30 Days' },
-        { name: '5GB Data', price: '22.5', data_allowance: '5GB', validity: '30 Days' },
-        { name: '6GB Data', price: '27', data_allowance: '6GB', validity: '30 Days' },
-        { name: '7GB Data', price: '31.5', data_allowance: '7GB', validity: '30 Days' },
-        { name: '8GB Data', price: '36', data_allowance: '8GB', validity: '30 Days' },
-        { name: '9GB Data', price: '40.5', data_allowance: '9GB', validity: '30 Days' },
-        { name: '10GB Data', price: '45', data_allowance: '10GB', validity: '30 Days' }
+        { name: '1GB Data', price: '4.5', data_allowance: '1GB', validity: '30 Days', brandKey: 'at' },
+        { name: '2GB Data', price: '9', data_allowance: '2GB', validity: '30 Days', brandKey: 'at' },
+        { name: '3GB Data', price: '13.5', data_allowance: '3GB', validity: '30 Days', brandKey: 'at' },
+        { name: '4GB Data', price: '18', data_allowance: '4GB', validity: '30 Days', brandKey: 'at' },
+        { name: '5GB Data', price: '22.5', data_allowance: '5GB', validity: '30 Days', brandKey: 'at' },
+        { name: '6GB Data', price: '27', data_allowance: '6GB', validity: '30 Days', brandKey: 'at' },
+        { name: '7GB Data', price: '31.5', data_allowance: '7GB', validity: '30 Days', brandKey: 'at' },
+        { name: '8GB Data', price: '36', data_allowance: '8GB', validity: '30 Days', brandKey: 'at' },
+        { name: '9GB Data', price: '40.5', data_allowance: '9GB', validity: '30 Days', brandKey: 'at' },
+        { name: '10GB Data', price: '45', data_allowance: '10GB', validity: '30 Days', brandKey: 'at' }
     ];
 
     const otherServices = [
-        { name: 'AFA Registration', price: '5', provider: 'Service', data_allowance: 'N/A', validity: 'N/A' }
+        { name: 'AFA Registration', price: '5', provider: 'Service', data_allowance: 'N/A', validity: 'N/A', brandKey: null }
     ];
 
     // Initialize cart from localStorage or create an empty one
@@ -67,14 +67,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function createProductListItem(bundle, providerName) {
         const fullProductName = providerName ? `${providerName} ${bundle.name}` : bundle.name;
         const productPrice = `GH¢${bundle.price}`;
+        let brandPlaceholderHtml = '';
 
-        // Placeholder for provider icon - can be expanded later
-        // let iconHtml = `<span class="product-icon placeholder-icon"></span>`;
-        // if (bundle.iconUrl) { iconHtml = `<img src="${bundle.iconUrl}" alt="${providerName}" class="product-icon">`; }
-        // else if (providerName === 'MTN') { iconHtml = `<span class="product-icon mtn-icon">M</span>`; } // Example
+        if (bundle.brandKey === 'mtn') {
+            brandPlaceholderHtml = `<span class="product-brand-placeholder mtn-brand-placeholder">MTN</span>`;
+        }
+        // Future placeholders for 'telecel', 'at', etc., can be added here with else if
+        // else if (bundle.brandKey === 'telecel') { brandPlaceholderHtml = `<span class="product-brand-placeholder telecel-brand-placeholder">Telecel</span>`; }
+        // else if (bundle.brandKey === 'at') { brandPlaceholderHtml = `<span class="product-brand-placeholder at-brand-placeholder">AT</span>`; }
+
 
         const listItem = `
             <li class="product-list-item">
+                <div class="product-brand-logo-container">
+                    ${brandPlaceholderHtml}
+                </div>
                 <div class="product-info">
                     <h5 class="product-name">${fullProductName}</h5>
                     <div class="product-details">
