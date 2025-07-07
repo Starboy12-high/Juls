@@ -71,10 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (bundle.brandKey === 'mtn') {
             brandPlaceholderHtml = `<span class="product-brand-placeholder mtn-brand-placeholder">MTN</span>`;
+        } else if (bundle.brandKey === 'telecel') {
+            brandPlaceholderHtml = `<span class="product-brand-placeholder telecel-brand-placeholder">Telecel</span>`;
+        } else if (bundle.brandKey === 'at') {
+            brandPlaceholderHtml = `<span class="product-brand-placeholder at-brand-placeholder">AT</span>`;
         }
-        // Future placeholders for 'telecel', 'at', etc., can be added here with else if
-        // else if (bundle.brandKey === 'telecel') { brandPlaceholderHtml = `<span class="product-brand-placeholder telecel-brand-placeholder">Telecel</span>`; }
-        // else if (bundle.brandKey === 'at') { brandPlaceholderHtml = `<span class="product-brand-placeholder at-brand-placeholder">AT</span>`; }
 
 
         const listItem = `

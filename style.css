@@ -469,7 +469,14 @@ a:hover {
     background-color: #FFCC00; /* MTN Yellow */
     color: #333; /* Dark text for contrast */
 }
-/* Add .telecel-brand-placeholder, .at-brand-placeholder here if needed in future */
+.telecel-brand-placeholder {
+    background-color: #E60000; /* Telecel Red */
+    color: #FFFFFF; /* White text */
+}
+.at-brand-placeholder {
+    background-color: #00A0AF; /* AT Tealish Blue */
+    color: #FFFFFF; /* White text */
+}
 
 
 .product-info {
@@ -535,7 +542,15 @@ a:hover {
 
 .dark-mode .mtn-brand-placeholder {
     background-color: #FFCC00; /* MTN Yellow remains vibrant */
-    color: #222; /* Slightly darker text for better contrast on yellow in dark mode if needed */
+    color: #222; /* Slightly darker text for better contrast on yellow in dark mode */
+}
+.dark-mode .telecel-brand-placeholder {
+    background-color: #C90000; /* Slightly darker Red for dark mode */
+    color: #FFFFFF;
+}
+.dark-mode .at-brand-placeholder {
+    background-color: #007A87; /* Slightly darker Tealish Blue for dark mode */
+    color: #FFFFFF;
 }
 
 .dark-mode .product-name {
