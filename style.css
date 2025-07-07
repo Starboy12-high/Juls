@@ -1,17 +1,56 @@
+:root {
+    --color-primary: #00A99D; /* Vibrant Teal */
+    --color-secondary: #FF8C42; /* Cheerful Orange */
+    --color-accent: #3D5A80; /* Sober Dark Blue */
+
+    --color-text-light: #333333;
+    --color-background-light: #FFFFFF;
+    --color-card-background-light: #FFFFFF;
+    --color-navbar-background-light: #f8f9fa; /* Bootstrap light default */
+    --color-navbar-text-light: #3D5A80;
+
+
+    --color-text-dark: #f8f9fa;
+    --color-background-dark: #202124; /* Darker than previous #333 */
+    --color-card-background-dark: #2E2F32; /* Darker than previous #3E3E3E */
+    --color-navbar-background-dark: #1a1a1a; /* Even darker navbar */
+    --color-navbar-text-dark: #00A99D; /* Teal for dark nav text */
+
+    --color-success: #28a745; /* Existing Bootstrap green, can be updated */
+    --color-info: #17a2b8;   /* Existing Bootstrap info, can be updated */
+    --color-warning: #ffc107; /* Existing Bootstrap warning */
+    --color-danger: #dc3545;  /* Existing Bootstrap danger */
+
+    --font-family-sans-serif: 'Arial', sans-serif; /* Consistent font */
+}
+
 body {
     transition: background-color 0.3s, color 0.3s;
-    font-family: 'Arial', sans-serif; /* Added a default font */
+    font-family: var(--font-family-sans-serif);
+    background-color: var(--color-background-light);
+    color: var(--color-text-light);
 }
 
 /* General Navbar Styling */
 .navbar {
+    background-color: var(--color-navbar-background-light);
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .navbar-brand {
     font-weight: bold;
+    color: var(--color-primary) !important; /* Teal for navbar brand */
 }
+
+.navbar .nav-link {
+    color: var(--color-navbar-text-light) !important;
+}
+
+.navbar .nav-link:hover {
+    color: var(--color-primary) !important; /* Teal hover for nav links */
+}
+
 
 /* Container adjustments */
 .container {
@@ -50,74 +89,183 @@ body {
 
 
 /* Button styling */
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+.btn-primary,
+.add-to-cart-btn /* Assuming this class is still used or can be targeted */ {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff; /* Ensure text is white on primary buttons */
 }
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+.btn-primary:hover,
+.add-to-cart-btn:hover {
+    background-color: #007A70; /* Darker teal */
+    border-color: #007A70;
+    color: #fff;
 }
 
-.btn-secondary { /* For theme toggle */
-    background-color: #6c757d;
-    border-color: #6c757d;
+.btn-secondary { /* For theme toggle and other secondary actions */
+    background-color: var(--color-accent); /* Accent Blue */
+    border-color: var(--color-accent);
+    color: #fff;
 }
 .btn-secondary:hover {
-    background-color: #545b62;
-    border-color: #4e555b;
+    background-color: #2c4058; /* Darker Accent Blue */
+    border-color: #2c4058;
+    color: #fff;
+}
+
+.btn-success { /* e.g. Fund Wallet, Pay Now */
+    background-color: var(--color-secondary); /* Cheerful Orange */
+    border-color: var(--color-secondary);
+    color: #fff;
+}
+.btn-success:hover {
+    background-color: #E67327; /* Darker Orange */
+    border-color: #E67327;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    border-color: var(--color-danger);
+    color: #fff;
+}
+.btn-danger:hover {
+    background-color: #c82333; /* Darker red */
+    border-color: #bd2130;
+    color: #fff;
+}
+
+.btn-info { /* For less critical actions or informational buttons */
+    background-color: var(--color-info);
+    border-color: var(--color-info);
+    color: #fff;
+}
+.btn-info:hover{
+    background-color: #117a8b; /* Darker info color */
+    border-color: #10707f;
+    color: #fff;
+}
+
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-accent); /* Accent Blue for headings */
+}
+.navbar-brand, /* Already handled, but for thoroughness */
+.card-title { /* Card titles also use accent color */
+    color: var(--color-accent) !important;
+}
+.container > h1, .container > h2, .container > h3 { /* Main page titles */
+    color: var(--color-primary); /* Teal for prominent page titles */
+}
+
+
+/* Links */
+a {
+    color: var(--color-primary);
+}
+a:hover {
+    color: #007A70; /* Darker teal */
+}
+
+/* Product Cards */
+.product-card {
+    border: 1px solid #eee; /* Lighter border */
+    transition: box-shadow 0.3s ease-in-out;
+}
+.product-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 169, 157, 0.15); /* Subtle teal shadow on hover */
 }
 
 
 /* Dark Mode Specifics */
 .dark-mode {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--color-background-dark);
+    color: var(--color-text-dark);
 }
 
 .dark-mode .navbar {
-    background-color: #222 !important; /* Important to override Bootstrap */
-    color: #fff !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    background-color: var(--color-navbar-background-dark) !important;
+    color: var(--color-navbar-text-dark) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Slightly stronger shadow for dark nav */
 }
 
-.dark-mode .navbar-brand,
+.dark-mode .navbar-brand { /* Ensure brand uses theme color */
+    color: var(--color-primary) !important;
+}
+
 .dark-mode .nav-link {
-    color: #f8f9fa !important; /* Lighter text for dark navbar */
+    color: var(--color-navbar-text-dark) !important;
 }
 .dark-mode .nav-link:hover {
-    color: #adb5bd !important; /* Hover effect for nav links */
+    color: var(--color-secondary) !important; /* Orange accent for hover */
 }
 
-.dark-mode .btn-primary {
-    background-color: #0056b3; /* Darker primary for dark mode */
-    border-color: #0056b3;
+/* Button styling will be more specifically addressed in the next step using CSS variables */
+.dark-mode .btn-primary,
+.dark-mode .add-to-cart-btn {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #FFFFFF; /* Ensure high contrast text on dark buttons */
 }
-.dark-mode .btn-primary:hover {
-    background-color: #003d80;
-    border-color: #003d80;
+.dark-mode .btn-primary:hover,
+.dark-mode .add-to-cart-btn:hover {
+    background-color: #00C2B2; /* Brighter teal for hover in dark mode */
+    border-color: #00C2B2;
+    color: #FFFFFF; /* Ensure high contrast text on dark buttons */
 }
 
-.dark-mode .btn-secondary { /* Theme toggle in dark mode */
-    background-color: #495057;
-    border-color: #495057;
-    color: #f8f9fa;
+.dark-mode .btn-secondary {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-text-dark);
 }
+.dark-mode .btn-secondary:hover {
+    background-color: #5272a0; /* Lighter Accent Blue for hover in dark */
+    border-color: #5272a0;
+}
+
+.dark-mode .btn-success {
+    background-color: var(--color-secondary); /* Orange */
+    border-color: var(--color-secondary);
+    color: var(--color-text-light); /* Ensure contrast */
+}
+.dark-mode .btn-success:hover {
+    background-color: #FFA500; /* Brighter Orange for hover */
+    border-color: #FFA500;
+}
+
+.dark-mode .btn-danger {
+    background-color: var(--color-danger);
+    border-color: var(--color-danger);
+}
+.dark-mode .btn-danger:hover {
+    background-color: #e0626e; /* Lighter danger */
+}
+
+.dark-mode .btn-info {
+    background-color: var(--color-info);
+    border-color: var(--color-info);
+}
+.dark-mode .btn-info:hover {
+    background-color: #3dbcd4; /* Lighter info */
+}
+
 
 /* Dashboard Tabs */
-.nav-tabs .nav-link {
-    color: #007bff;
+.nav-tabs .nav-link { /* Light mode tabs */
+    color: var(--color-accent);
 }
 .nav-tabs .nav-link.active {
-    color: #495057;
-    background-color: #fff;
-    border-color: #dee2e6 #dee2e6 #fff;
+    color: var(--color-primary);
+    background-color: var(--color-background-light);
+    border-color: #dee2e6 #dee2e6 var(--color-background-light);
 }
-.tab-content {
+.tab-content { /* Light mode tab content */
     border: 1px solid #dee2e6;
     border-top: 0;
     padding: 1rem;
-    background-color: #fff;
+    background-color: var(--color-background-light);
 }
 
 /* Cart Page Styles */
@@ -128,7 +276,7 @@ body {
 
 /* Checkout Page Styles */
 #order-summary-list .list-group-item {
-    padding: 0.5rem 1.25rem; /* Slightly reduce padding */
+    padding: 0.5rem 1.25rem;
 }
 #order-summary-list h6 {
     font-size: 0.95rem;
@@ -141,65 +289,54 @@ body {
 
 /* Dark Mode Dashboard Tabs */
 .dark-mode .nav-tabs .nav-link {
-    color: #80bdff; /* Lighter blue for dark mode */
-    border-color: #555 #555 #3E3E3E;
+    color: var(--color-primary); /* Teal for dark mode tab links */
+    border-color: #444 #444 var(--color-card-background-dark);
 }
 .dark-mode .nav-tabs .nav-link.active {
-    color: #f8f9fa; /* White text for active tab */
-    background-color: #3E3E3E; /* Tab content background */
-    border-color: #555 #555 #3E3E3E;
+    color: var(--color-secondary); /* Orange for active tab text in dark mode */
+    background-color: var(--color-card-background-dark);
+    border-color: #444 #444 var(--color-card-background-dark);
 }
 .dark-mode .nav-tabs {
-    border-bottom-color: #555;
+    border-bottom-color: #444;
 }
 .dark-mode .tab-content {
-    background-color: #3E3E3E; /* Darker background for tab content area */
-    color: #f8f9fa;
-    border-color: #555;
-}
-.dark-mode .btn-secondary:hover {
-    background-color: #343a40;
-    border-color: #343a40;
+    background-color: var(--color-card-background-dark);
+    color: var(--color-text-dark);
+    border-color: #444;
 }
 
 
 .dark-mode .card {
-    background-color: #3E3E3E; /* Slightly lighter than body for contrast */
-    color: #f8f9fa;
-    border-color: #555;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    background-color: var(--color-card-background-dark);
+    color: var(--color-text-dark);
+    border-color: #444; /* Slightly lighter border for cards */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-.dark-mode .product-card .btn-success {
-    background-color: #1e7e34; /* Darker green for dark mode */
-    border-color: #1e7e34;
-}
-.dark-mode .product-card .btn-success:hover {
-    background-color: #155724;
-    border-color: #155724;
-}
+/* .dark-mode .product-card .btn-success will be handled in next step */
 
 
 .dark-mode .form-control {
-    background-color: #495057;
-    color: #f8f9fa;
-    border-color: #6c757d;
+    background-color: #3a3b3c; /* Slightly lighter than card for forms */
+    color: var(--color-text-dark);
+    border-color: #555;
 }
 
 .dark-mode .form-control::placeholder {
-    color: #adb5bd;
+    color: #aaa;
 }
 .dark-mode .form-control:focus {
-    background-color: #495057;
-    color: #f8f9fa;
-    border-color: #80bdff; /* Bootstrap focus color */
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    background-color: #3a3b3c;
+    color: var(--color-text-dark);
+    border-color: var(--color-primary); /* Teal focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 169, 157, 0.25); /* Teal shadow */
 }
 
 
 .dark-mode .modal-content {
-    background-color: #2c2c2c; /* Darker modal background */
-    color: #f8f9fa;
+    background-color: var(--color-card-background-dark);
+    color: var(--color-text-dark);
     border: 1px solid #555;
 }
 
@@ -211,21 +348,29 @@ body {
 }
 
 .dark-mode .close {
-    color: #f8f9fa;
-    text-shadow: none; /* Remove default shadow which might not look good on dark */
+    color: var(--color-text-dark);
+    text-shadow: none;
 }
 .dark-mode .close:hover {
-    color: #adb5bd;
+    color: var(--color-secondary); /* Orange on hover */
 }
 
-.dark-mode .list-group-item { /* If you use list groups anywhere */
-    background-color: #3E3E3E;
-    border-color: #555;
-    color: #f8f9fa;
+.dark-mode .list-group-item {
+    background-color: var(--color-card-background-dark);
+    border-color: #444;
+    color: var(--color-text-dark);
 }
 .dark-mode .list-group-item a {
-    color: #80bdff; /* Light blue for links in dark mode list items */
+    color: var(--color-primary); /* Teal links */
 }
 .dark-mode .list-group-item a:hover {
-    color: #a1caf1;
+    color: var(--color-secondary); /* Orange hover */
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6,
+.dark-mode .card-title {
+    color: var(--color-text-dark); /* Default dark text */
+}
+.dark-mode .container > h1, .dark-mode .container > h2, .dark-mode .container > h3 {
+    color: var(--color-primary); /* Teal for prominent page titles in dark mode too */
 }
